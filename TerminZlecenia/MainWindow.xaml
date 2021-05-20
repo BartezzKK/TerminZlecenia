@@ -1,0 +1,27 @@
+﻿<Window x:Class="TerminZlecenia.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TerminZlecenia"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <StackPanel>
+            <DatePicker x:Name="lastDate" ></DatePicker>
+            <TextBox Text="{Binding AverageQuantity, Mode=TwoWay}" ></TextBox>
+            <Button Name="btnOpenDialog" Click="btnOpenDialog_Click" Width="100" HorizontalAlignment="Center">Wybierz plik</Button>
+            <Button Name="calculateDates2" Click="calculateDates_Click" Width="100">Oblicz</Button>
+            <ListView x:Name="ListViewOrder">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Nazwa zlecenia" Width="400" DisplayMemberBinding="{Binding Path=OrderName, Mode=TwoWay}"></GridViewColumn>
+                        <GridViewColumn Header="Ilość sztuk" Width="100" DisplayMemberBinding="{Binding Path=Quantity, Mode=TwoWay}"></GridViewColumn>
+                        <GridViewColumn Header="Termin realizacji" Width="300" DisplayMemberBinding="{Binding Path=EstimatedEndTime, Mode=TwoWay, StringFormat='{}{0:dd.MM.yyyy}'}"></GridViewColumn>
+                        
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </StackPanel>
+    </Grid>
+</Window>
