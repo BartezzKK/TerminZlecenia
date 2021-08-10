@@ -5,23 +5,40 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TerminZlecenia"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <StackPanel>
-            <DatePicker x:Name="lastDate" ></DatePicker>
-            <TextBox Text="{Binding AverageQuantity, Mode=TwoWay}" ></TextBox>
-            <Button Name="btnOpenDialog" Click="btnOpenDialog_Click" Width="100" HorizontalAlignment="Center">Wybierz plik</Button>
-            <Button Name="calculateDates2" Click="calculateDates_Click" Width="100">Oblicz</Button>
-            <ListView x:Name="ListViewOrder">
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn Header="Nazwa zlecenia" Width="400" DisplayMemberBinding="{Binding Path=OrderName, Mode=TwoWay}"></GridViewColumn>
-                        <GridViewColumn Header="Ilość sztuk" Width="100" DisplayMemberBinding="{Binding Path=Quantity, Mode=TwoWay}"></GridViewColumn>
-                        <GridViewColumn Header="Termin realizacji" Width="300" DisplayMemberBinding="{Binding Path=EstimatedEndTime, Mode=TwoWay, StringFormat='{}{0:dd.MM.yyyy}'}"></GridViewColumn>
-                        
-                    </GridView>
-                </ListView.View>
-            </ListView>
-        </StackPanel>
+        Title="MainWindow" Height="500" Width="800">
+    <Grid Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <DatePicker x:Name="lastDate" Margin="10,4,440,66" ></DatePicker>
+            <TextBox Text="{Binding AverageQuantity}" Margin="263,64,384,16" ></TextBox>
+            <Button Name="btnOpenDialog" Click="btnOpenDialog_Click" Width="88" HorizontalAlignment="Left" Margin="82,39,0,37">Wybierz plik</Button>
+            <Button Name="calculateDates2" Click="calculateDates_Click" Margin="671,64,10,11">Oblicz</Button>
+            <Label Content="Podaj średnią ilość dni" HorizontalAlignment="Left" Margin="263,0,0,0" VerticalAlignment="Center" Cursor=""/>
+        </Grid>
+        <Grid Grid.Row="1">
+            <ScrollViewer VerticalScrollBarVisibility="Auto" Foreground="Red" Height="500">
+                <DataGrid x:Name="DataGridTable" AutoGenerateColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Nazwa zlecenia" Binding="{Binding OrderName}" Width="60*"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Ilość sztuk" Binding="{Binding Quantity}" Width="10*"></DataGridTextColumn>
+                        <DataGridTextColumn 
+                        Header="Termin realizacji" 
+                        Binding="{Binding EstimatedEndTime, StringFormat='{}{0:dd.MM.yyyy}'}" 
+                        Width="30*">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style>
+                                    <Setter Property="TextBlock.TextAlignment" Value="Center"></Setter>
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </ScrollViewer>
+        </Grid>
+
     </Grid>
 </Window>
