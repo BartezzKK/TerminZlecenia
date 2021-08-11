@@ -5,40 +5,79 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TerminZlecenia"
         mc:Ignorable="d"
-        Title="MainWindow" Height="500" Width="800">
+        Title="Kalkulator zleceń" Height="600" Width="800">
     <Grid Margin="5">
         <Grid.RowDefinitions>
-            <RowDefinition Height="100"></RowDefinition>
+            <RowDefinition Height="120">
+            </RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-
-        <Grid Grid.Row="0">
-            <DatePicker x:Name="lastDate" Margin="10,4,440,66" ></DatePicker>
-            <TextBox Text="{Binding AverageQuantity}" Margin="263,64,384,16" ></TextBox>
-            <Button Name="btnOpenDialog" Click="btnOpenDialog_Click" Width="88" HorizontalAlignment="Left" Margin="82,39,0,37">Wybierz plik</Button>
-            <Button Name="calculateDates2" Click="calculateDates_Click" Margin="671,64,10,11">Oblicz</Button>
-            <Label Content="Podaj średnią ilość dni" HorizontalAlignment="Left" Margin="263,0,0,0" VerticalAlignment="Center" Cursor=""/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="3*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Row="0" Background="Gainsboro">
+            <StackPanel>
+                <Button Name="btnOpenDialog" Background="Tan"
+                        BorderBrush="Black"
+                        BorderThickness="2"
+                        Click="btnOpenDialog_Click">
+                    Wybierz plik
+                </Button>
+                <DatePicker x:Name="lastDate"
+                            Width="150"
+                            HorizontalAlignment="Left"
+                            Margin="0 10 0 0">
+                </DatePicker>
+                <StackPanel Orientation="Horizontal" >
+                    <Label Content="Podaj średnią ilość sztuk"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Center"/>
+                    <TextBox Text="{Binding AverageQuantity}"
+                             HorizontalAlignment="Left"
+                             Width="50">
+                    </TextBox>
+                </StackPanel>
+                <Button Name="calculateDates2"
+                        Background="Tan"
+                        BorderBrush="Black"
+                        BorderThickness="2"
+                        Margin="0 10 0 0"
+                        Click="calculateDates_Click">Oblicz</Button>
+            </StackPanel>
         </Grid>
-        <Grid Grid.Row="1">
-            <ScrollViewer VerticalScrollBarVisibility="Auto" Foreground="Red" Height="500">
-                <DataGrid x:Name="DataGridTable" AutoGenerateColumns="False">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="Nazwa zlecenia" Binding="{Binding OrderName}" Width="60*"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Ilość sztuk" Binding="{Binding Quantity}" Width="10*"></DataGridTextColumn>
-                        <DataGridTextColumn 
+        <Grid Grid.Row="0"
+              Grid.Column="1">
+            <Image Source="https://akrostal.pl/wp-content/themes/JointsWP/amc-assets/akrostal-logo.png" HorizontalAlignment="Right"/>
+        </Grid>
+        <Grid Grid.Row="1" Grid.ColumnSpan="2">
+            <DataGrid x:Name="DataGridTable"
+                      AutoGenerateColumns="False"
+                      BorderBrush="Black"
+                      AlternatingRowBackground="DarkGray"
+                      AlternationCount="2">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Nazwa zlecenia"
+                                        Binding="{Binding OrderName}"
+                                        Width="60*">
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Ilość sztuk"
+                                        Binding="{Binding Quantity}"
+                                        Width="10*"></DataGridTextColumn>
+                    <DataGridTextColumn 
                         Header="Termin realizacji" 
                         Binding="{Binding EstimatedEndTime, StringFormat='{}{0:dd.MM.yyyy}'}" 
                         Width="30*">
-                            <DataGridTextColumn.ElementStyle>
-                                <Style>
-                                    <Setter Property="TextBlock.TextAlignment" Value="Center"></Setter>
-                                </Style>
-                            </DataGridTextColumn.ElementStyle>
-                        </DataGridTextColumn>
-                    </DataGrid.Columns>
-                </DataGrid>
-            </ScrollViewer>
+                        <DataGridTextColumn.ElementStyle>
+                            <Style>
+                                <Setter Property="TextBlock.TextAlignment"
+                                        Value="Center">
+                                </Setter>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
         </Grid>
-
     </Grid>
 </Window>
